@@ -1,0 +1,12 @@
+namespace TreeViewExample
+{
+	[bindable]
+	[default_interface]
+	runtimeclass TreeItemViewModel
+	{
+		TreeItemViewModel();
+
+		String Name{ get; };
+		Windows.Foundation.Collections.IObservableVector<TreeItemViewModel> Children{ get; };
+	}
+}
