@@ -1,9 +1,11 @@
+import "TreeItemViewModel.idl";
+
 namespace TreeViewExample
 {
     [default_interface]
     runtimeclass MainWindow : Microsoft.UI.Xaml.Window
     {
         MainWindow();
-        Int32 MyProperty;
+        TreeItemViewModel RootTreeItem{ get; };
     }
 }

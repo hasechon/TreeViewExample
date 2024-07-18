@@ -9,6 +9,12 @@
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
+        <TreeView x:Name="myTreeView" Width="200" Height="200" ItemsSource="{x:Bind RootTreeItem.Children}">
+            <TreeView.ItemTemplate>
+                <DataTemplate x:DataType="local:TreeItemViewModel">
+                    <TreeViewItem x:Name="TreeItem" ItemsSource="{x:Bind Children}" Content="{x:Bind Name}"/>
+                </DataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
     </StackPanel>
 </Window>

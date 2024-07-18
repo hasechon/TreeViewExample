@@ -7,23 +7,32 @@
 using namespace winrt;
 using namespace Microsoft::UI::Xaml;
 
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
-
 namespace winrt::TreeViewExample::implementation
 {
-    int32_t MainWindow::MyProperty()
-    {
-        throw hresult_not_implemented();
-    }
+	MainWindow::MainWindow()
+	{
+		tree_item_view_model_ = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Root");
 
-    void MainWindow::MyProperty(int32_t /* value */)
-    {
-        throw hresult_not_implemented();
-    }
+		TreeViewExample::TreeItemViewModel parent1 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Parent1");
+		TreeViewExample::TreeItemViewModel parent2 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Parent2");
+		TreeViewExample::TreeItemViewModel child11 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Child11");
+		TreeViewExample::TreeItemViewModel child12 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Child12");
+		TreeViewExample::TreeItemViewModel child21 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Child21");
+		TreeViewExample::TreeItemViewModel child22 = winrt::make<TreeViewExample::implementation::TreeItemViewModel>(L"Child22");
 
-    void MainWindow::myButton_Click(IInspectable const&, RoutedEventArgs const&)
-    {
-        myButton().Content(box_value(L"Clicked"));
-    }
+		parent1.Children().Append(child11);
+		parent1.Children().Append(child12);
+		parent2.Children().Append(child21);
+		parent2.Children().Append(child22);
+
+		tree_item_view_model_.Children().Append(parent1);
+		tree_item_view_model_.Children().Append(parent2);
+
+		InitializeComponent();
+	}
+
+	TreeViewExample::TreeItemViewModel MainWindow::RootTreeItem()
+	{
+		return tree_item_view_model_;
+	}
 }

@@ -1,27 +1,24 @@
 #pragma once
 
 #include "MainWindow.g.h"
+#include "TreeItemViewModel.h"
 
 namespace winrt::TreeViewExample::implementation
 {
-    struct MainWindow : MainWindowT<MainWindow>
-    {
-        MainWindow()
-        {
-            // Xaml objects should not call InitializeComponent during construction.
-            // See https://github.com/microsoft/cppwinrt/tree/master/nuget#initializecomponent
-        }
+	struct MainWindow : MainWindowT<MainWindow>
+	{
+	public:
+		MainWindow();
+		TreeViewExample::TreeItemViewModel RootTreeItem();
 
-        int32_t MyProperty();
-        void MyProperty(int32_t value);
-
-        void myButton_Click(IInspectable const& sender, Microsoft::UI::Xaml::RoutedEventArgs const& args);
-    };
+	private:
+		TreeViewExample::TreeItemViewModel tree_item_view_model_{ nullptr };
+	};
 }
 
 namespace winrt::TreeViewExample::factory_implementation
 {
-    struct MainWindow : MainWindowT<MainWindow, implementation::MainWindow>
-    {
-    };
+	struct MainWindow : MainWindowT<MainWindow, implementation::MainWindow>
+	{
+	};
 }
